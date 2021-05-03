@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements View.OnClickListener {
 
     //variables
     private List<ListElement> mData; //lista que contendra todos los datos de tipo listElement
     private LayoutInflater mInflater;//layout inflater para describir el tipo de layout
     private Context context;//contexto, clase de la que se llama el adaptador
+    //escuchador
+    private View.OnClickListener listener;
+
 
     /**
      * Constructor
@@ -38,15 +41,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
     //creando una vista               //referencia de como se mostrara en el recycler
         View view = mInflater.inflate(R.layout.list_element, null);
+
+        //agregando el listener
+        view.setOnClickListener((View.OnClickListener) this);
+
         //se le asigna la vista al adapter
-        return  new ListAdapter.ViewHolder(view);
+        return  new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.bindData(mData.get(position));
     }
 
@@ -60,30 +67,51 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     /**
+     *método que escuchara el evento del clic
+     *
+     */
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+    /**
+     * asignando el onclick si el listener no es nulo
+     * @param view
+     */
+    public void onClick(View view) {
+        if(listener!=null){
+            listener.onClick(view);
+        }
+    }
+
+    /**
      *
      * declaramos cada elemento del listElemet
+     *
      */
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView iconImage;
-        TextView name, city, status;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView iconImage, datailImageView;
+        TextView titulo, kcal;
+
 
         ViewHolder(View itemView){
             super(itemView);
             //uniendo la parte lógica con la grafica con find..
             iconImage = itemView.findViewById(R.id.iconImageView);
-            name = itemView.findViewById(R.id.nameTextView);
-            city = itemView.findViewById(R.id.cityTextView);
-            status = itemView.findViewById(R.id.statusTextView);
+            titulo = itemView.findViewById(R.id.tituloTextView);
+            kcal = itemView.findViewById(R.id.kcalTextView);
+            //detail = itemView.findViewById(R.id.datailImageView);
+            //itemView.setOnClickListener(this);
         }
 
         void bindData(final ListElement item){
             //cambios de cada etiqueta
-            iconImage.setColorFilter(Color.parseColor(item.getColor()), PorterDuff.Mode.SRC_IN);
-            name.setText(item.getName());
-            city.setText(item.getCity());
-            status.setText(item.getStatus());
+            iconImage.setImageResource(item.getImagen());
+            titulo.setText(item.getTitulo());
+            kcal.setText(item.getKcal());
         }
 
-
     }
+
+
+
 }

@@ -29,7 +29,8 @@
                 android:layout_gravity="center"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
-                android:src="@drawable/ic_baseline_contact_mail_24"
+                android:src="@drawable/flan"
+
                 android:layout_alignParentLeft="true"/>
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -44,33 +45,33 @@
                 android:layout_toRightOf="@+id/iconImageView">
 
                 <TextView
-                    android:id="@+id/nameTextView"
+                    android:id="@+id/tituloTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="Codelia"
+                    android:text="Flan"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
                 <TextView
-                    android:id="@+id/cityTextView"
+                    android:id="@+id/kcalTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mexico"
+                    android:text="1200 kcal"
                     android:textSize="18sp"/>
             </LinearLayout>
-            <TextView
-                android:id="@+id/statusTextView"
+            <ImageView
+                android:id="@+id/datailImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="6dp"
                 android:layout_marginRight="6dp"
-                android:text="Activo"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_detail_ligth"
+                />
+
 
         </RelativeLayout>
 
